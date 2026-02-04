@@ -1,11 +1,11 @@
 import { Trash2, Pencil } from 'lucide-react';
 import styles from './PostCard.module.css';
 
-function PostCard() {
+function PostCard({ post }) {
   return (
     <article className={styles.card}>
       <header className={styles.header}>
-        <h3 className={styles.title}>{"Title"}</h3>
+        <h3 className={styles.title}>{post.title}</h3>
           <div className={styles.actions}>
             <button
               className={styles.iconButton}
@@ -23,9 +23,9 @@ function PostCard() {
       </header>
       <div className={styles.body}>
         <div className={styles.meta}>
-          <span className={styles.username}>@{"User name"}</span>
+          <span className={styles.username}>@{post.username}</span>
         </div>
-        <p className={styles.content}>{"Content"}</p>
+        <p className={styles.content}>{post.content}</p>
       </div>
     </article>
   );
