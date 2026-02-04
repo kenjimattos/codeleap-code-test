@@ -6,14 +6,22 @@ const STORAGE_KEY = 'codeleap_username';
 
 export function UserProvider({ children }) {
   const [username, setUsername] = useState(() => {
-    return localStorage.getItem(STORAGE_KEY) || '';
+    try {
+      return localStorage.getItem(STORAGE_KEY) || '';
+    } catch {
+      return '';
+    }
   });
 
   useEffect(() => {
-    if (username) {
-      localStorage.setItem(STORAGE_KEY, username);
-    } else {
-      localStorage.removeItem(STORAGE_KEY);
+    try {
+      if (username) {
+        localStorage.setItem(STORAGE_KEY, username);
+      } else {
+        localStorage.removeItem(STORAGE_KEY);
+      }
+    } catch {
+      // Storage unavailable (e.g., private browsing)
     }
   }, [username]);
 

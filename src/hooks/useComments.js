@@ -3,12 +3,20 @@ import { useState, useCallback } from 'react';
 const STORAGE_KEY = 'codeleap_comments';
 
 function getCommentsFromStorage() {
-  const stored = localStorage.getItem(STORAGE_KEY);
-  return stored ? JSON.parse(stored) : {};
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : {};
+  } catch {
+    return {};
+  }
 }
 
 function saveCommentsToStorage(comments) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+  } catch {
+    // Storage full or unavailable (e.g., private browsing)
+  }
 }
 
 export function useComments() {
