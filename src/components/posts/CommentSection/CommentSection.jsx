@@ -16,7 +16,11 @@ function CommentSection({ comments, onAddComment }) {
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit}>
+        <label htmlFor="comment-input" className={styles.srOnly}>
+          Write a comment
+        </label>
         <input
+          id="comment-input"
           type="text"
           className={styles.input}
           placeholder="Write a comment..."
