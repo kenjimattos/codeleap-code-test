@@ -55,3 +55,15 @@ body {
 #root {
   min-height: 100vh;
 }
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --font-size-title: 18px;
+    --font-size-body: 16px;
+    --font-size-label: 14px;
+    --font-size-small: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 24px;
+  }
+}
