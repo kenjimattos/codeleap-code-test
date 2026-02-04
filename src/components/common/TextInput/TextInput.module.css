@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.label {
+  font-size: var(--font-size-label);
+  color: var(--color-text);
+}
+
+.input {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: var(--border-width) solid var(--color-input-border);
+  border-radius: var(--border-radius-input);
+  font-family: var(--font-family);
+  font-size: var(--font-size-small);
+  outline: none;
+  transition: border-color 0.2s ease;
+  resize: vertical;
+}
+
+.input::placeholder {
+  color: var(--color-placeholder);
+}
+
+.input:focus {
+  border-color: var(--color-primary);
+}
