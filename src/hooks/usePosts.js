@@ -19,6 +19,16 @@ export function usePosts() {
     }
   }, []);
 
+  const createPost = useCallback(async (username, title, content) => {
+    try {
+      setError(null);
+      await api.createPost(username, title, content);
+      await fetchPosts();
+    } catch (err) {
+      setError(err.message);
+    }
+  }, [fetchPosts]);
+
   useEffect(() => {
     fetchPosts();
   }, [fetchPosts]);
@@ -27,6 +37,7 @@ export function usePosts() {
     posts,
     loading,
     error,
+    createPost,
     refetch: fetchPosts
   };
 }

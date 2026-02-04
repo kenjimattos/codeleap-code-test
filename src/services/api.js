@@ -25,3 +25,16 @@ export async function getPosts() {
     )
   };
 }
+
+export async function createPost(username, title, content) {
+  const newPost = {
+    id: Date.now(),
+    username,
+    title,
+    content,
+    created_datetime: new Date().toISOString()
+  };
+  mockPosts.unshift(newPost);
+  return newPost;
+}
+

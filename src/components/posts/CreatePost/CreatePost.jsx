@@ -7,10 +7,19 @@ function CreatePost({ onSubmit }) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (title.trim() && content.trim()) {
+      onSubmit(title.trim(), content.trim());
+      setTitle('');
+      setContent('');
+    }
+  };
+
   const isDisabled = !title.trim() || !content.trim();
 
   return (
-    <form className={styles.card}>
+    <form className={styles.card} onSubmit={handleSubmit}>
       <h2 className={styles.title}>What's on your mind?</h2>
       <TextInput
         label="Title"

@@ -8,13 +8,17 @@ import PostList from '../../components/posts/PostList';
 
 function Main() {
   const { username } = useUser();
-  const { posts, loading } = usePosts();
+  const { posts, loading, createPost } = usePosts();
+
+  const handleCreate = async (title, content) => {
+    await createPost(username, title, content);
+  };
   
   return (
     <div className={styles.page}>
      <Header />
       <main className={styles.content}>
-       <CreatePost />
+       <CreatePost onSubmit={handleCreate}/>
         <PostList
           posts={posts}
           currentUser={username}
