@@ -1,0 +1,69 @@
+.card {
+  background-color: var(--color-background);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius-card);
+  overflow: hidden;
+}
+
+.header {
+  background-color: var(--color-primary);
+  padding: var(--spacing-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-white);
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.iconButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-xxs);
+  color: var(--color-text-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+.iconButton:hover {
+  opacity: 0.8;
+}
+
+.body {
+  padding: var(--spacing-lg);
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+}
+
+.username {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-muted);
+}
+
+.time {
+  font-size: var(--font-size-body);
+  color: var(--color-text-muted);
+}
+
+.content {
+  font-size: var(--font-size-body);
+  color: var(--color-text);
+  line-height: 1.4;
+  white-space: pre-wrap;
+}

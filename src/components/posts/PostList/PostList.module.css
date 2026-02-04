@@ -1,0 +1,13 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.loading,
+.empty {
+  text-align: center;
+  padding: var(--spacing-xxl) var(--spacing-lg);
+  font-size: var(--font-size-body);
+  color: var(--color-text-muted);
+}
