@@ -9,7 +9,7 @@ function Main() {
     <div className={styles.page}>
      <Header />
       <main className={styles.content}>
-       
+       <CreatePost />
       </main>
 
     </div>
