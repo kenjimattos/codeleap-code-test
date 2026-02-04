@@ -28,7 +28,17 @@ export function usePosts() {
       setError(err.message);
     }
   }, [fetchPosts]);
-  
+
+  const updatePost = useCallback(async (id, title, content) => {
+    try {
+      setError(null);
+      await api.updatePost(id, title, content);
+      await fetchPosts();
+    } catch (err) {
+      setError(err.message);
+    }
+  }, [fetchPosts]);
+
   const deletePost = useCallback(async (id) => {
     try {
       setError(null);
@@ -48,6 +58,7 @@ export function usePosts() {
     loading,
     error,
     createPost,
+    updatePost,
     deletePost,
     refetch: fetchPosts
   };

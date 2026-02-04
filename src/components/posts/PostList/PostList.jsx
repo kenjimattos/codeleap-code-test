@@ -1,7 +1,7 @@
 import PostCard from '../PostCard';
 import styles from './PostList.module.css';
 
-function PostList({posts, onDelete,loading}) {
+function PostList({ posts, onDelete, onEdit, loading }) {
   if (loading) {
     return <div className={styles.loading}>Loading posts...</div>;
   }
@@ -16,6 +16,7 @@ function PostList({posts, onDelete,loading}) {
         <PostCard
           key={post.id}
           post={post}
+          onEdit={onEdit}
           onDelete={onDelete}
         />
       ))}

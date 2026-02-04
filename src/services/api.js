@@ -18,6 +18,8 @@ let mockPosts = [
   }
 ];
 
+let nextId = 3;
+
 export async function getPosts() {
   return {
     results: [...mockPosts].sort((a, b) =>
@@ -28,7 +30,7 @@ export async function getPosts() {
 
 export async function createPost(username, title, content) {
   const newPost = {
-    id: Date.now(),
+    id: nextId++,
     username,
     title,
     content,
@@ -38,7 +40,18 @@ export async function createPost(username, title, content) {
   return newPost;
 }
 
+export async function updatePost(id, title, content) {
+
+  const index = mockPosts.findIndex(post => post.id === id);
+  if (index === -1) {
+    throw new Error('Post not found');
+  }
+  mockPosts[index] = { ...mockPosts[index], title, content };
+  return mockPosts[index];
+}
+
 export async function deletePost(id) {
+
   const index = mockPosts.findIndex(post => post.id === id);
   if (index === -1) {
     throw new Error('Post not found');
@@ -46,4 +59,3 @@ export async function deletePost(id) {
   mockPosts.splice(index, 1);
   return true;
 }
-

@@ -4,21 +4,32 @@ import { usePosts } from '../../hooks/usePosts';
 import Header from '../../components/posts/Header';
 import CreatePost from '../../components/posts/CreatePost';
 import PostList from '../../components/posts/PostList';
+import EditModal from '../../components/posts/EditModal';
 import DeleteModal from '../../components/posts/DeleteModal';
 import styles from './Main.module.css';
 
 function Main() {
   const { username } = useUser();
-  const { posts, loading, createPost, deletePost } = usePosts();
+  const { posts, loading, createPost, updatePost, deletePost } = usePosts();
 
+  const [editingPost, setEditingPost] = useState(null);
   const [deletingPost, setDeletingPost] = useState(null);
 
   const handleCreate = async (title, content) => {
     await createPost(username, title, content);
   };
 
+  const handleEdit = (post) => {
+    setEditingPost(post);
+  };
+
   const handleDelete = (post) => {
     setDeletingPost(post);
+  };
+
+  const handleSaveEdit = async (id, title, content) => {
+    await updatePost(id, title, content);
+    setEditingPost(null);
   };
 
   const handleConfirmDelete = async () => {
@@ -36,10 +47,19 @@ function Main() {
         <PostList
           posts={posts}
           currentUser={username}
+          onEdit={handleEdit}
           onDelete={handleDelete}
           loading={loading}
         />
       </main>
+
+      {editingPost && (
+        <EditModal
+          post={editingPost}
+          onClose={() => setEditingPost(null)}
+          onSave={handleSaveEdit}
+        />
+      )}
 
       {deletingPost && (
         <DeleteModal
