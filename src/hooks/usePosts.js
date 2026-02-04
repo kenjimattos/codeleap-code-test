@@ -11,7 +11,7 @@ export function usePosts() {
       setLoading(true);
       setError(null);
       const data = await api.getPosts();
-      setPosts(data.results);
+      setPosts(data.results || []);
     } catch (err) {
       setError(err.message);
     } finally {
