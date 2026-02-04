@@ -205,6 +205,10 @@ src/
 
 > **Technical Note:** The CodeLeap API uses offset/limit pagination (Django REST Framework default). This approach has O(n) performance degradation at scale because the database must scan all preceding records to reach the offset. For production systems with millions of records, cursor-based pagination would be preferable as it provides O(1) performance by using indexed lookups. However, since we don't control the backend, we follow the `next` URL provided by the API response.
 
+---
+
+### Phase 5: Accessibility & Testing
+
 #### Step 24: Accessibility
 - [ ] **Modal accessibility:** Add `role="dialog"`, `aria-modal="true"`, focus trap, and Escape key handler to `Modal.jsx`
 - [ ] **Input labels:** Add proper `<label>` associations in `CommentSection.jsx`
