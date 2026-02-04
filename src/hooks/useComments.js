@@ -26,7 +26,7 @@ export function useComments() {
     if (!text.trim()) return;
 
     const newComment = {
-      id: Date.now(),
+      id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       username,
       text: text.trim(),
       created_datetime: new Date().toISOString(),
