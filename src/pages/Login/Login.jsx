@@ -1,16 +1,28 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../context/UserContext';
 import Button from '../../components/common/Button';
 import TextInput from '../../components/common/TextInput';
 import styles from './Login.module.css';
 
 function Login() {
   const [name, setName] = useState('');
+  const { login } = useUser();
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (name.trim()) {
+      login(name.trim());
+      navigate('/');
+    }
+  };
 
   const isDisabled = !name.trim();
 
   return (
     <div className={styles.container}>
-      <form className={styles.card}>
+      <form className={styles.card} onSubmit={handleSubmit}>
         <h1 className={styles.title}>Welcome to CodeLeap network!</h1>
         <TextInput
           label="Please enter your username"
