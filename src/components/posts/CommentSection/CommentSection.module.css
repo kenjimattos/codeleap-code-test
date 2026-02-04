@@ -1,7 +1,6 @@
 .container {
   margin-top: var(--spacing-md);
   padding-top: var(--spacing-md);
-  border-top: var(--border-width) solid var(--color-border);
 }
 
 .form {
