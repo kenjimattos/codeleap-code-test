@@ -173,6 +173,50 @@ src/
 
 ---
 
+### Phase 4: Bug Fixes & Improvements
+
+#### Step 18: Critical Fixes
+- [ ] **Fix posts fetching:** `usePosts.js` assumes paginated response with `results` property, but API returns array directly. Change `setPosts(data.results)` to `setPosts(data)`
+- [ ] **Validate API URL:** Add validation for `REACT_APP_API_URL` in `api.js` - show friendly error if undefined
+
+#### Step 19: Error Handling & UX
+- [ ] **Display errors in UI:** Add error banner in `Main.jsx` to show `error` state from `usePosts`
+- [ ] **localStorage try/catch:** Wrap localStorage operations in `useLikes.js`, `useComments.js`, and `UserContext.jsx` with try/catch and fallback
+
+#### Step 20: Data Integrity
+- [ ] **Unique comment IDs:** Replace `Date.now()` with more robust ID generation in `useComments.js`
+- [ ] **Orphan cleanup:** Clean up comments/likes when a post is deleted
+
+#### Step 21: Request Management
+- [ ] **Abort controller:** Add request cancellation in `usePosts.js` to prevent setState on unmounted components
+
+#### Step 22: Input Validation
+- [ ] **Field length limits:** Add max length validation for title/content in `CreatePost.jsx`, `EditModal.jsx`, and `CommentSection.jsx`
+
+#### Step 23: Pagination
+- [ ] **Update `api.js`:** Add optional `url` parameter to `getPosts()` to support fetching next pages
+- [ ] **Update `usePosts.js`:**
+  - Add `nextUrl` state to track next page URL
+  - Add `hasMore` computed from `nextUrl !== null`
+  - Add `loadMore()` function to fetch and append next page
+  - Add `loadingMore` state for "Load more" button feedback
+- [ ] **Update `PostList.jsx`:** Add "Load more" button when `hasMore` is true
+- [ ] **Update `PostList.module.css`:** Style the "Load more" button
+
+> **Technical Note:** The CodeLeap API uses offset/limit pagination (Django REST Framework default). This approach has O(n) performance degradation at scale because the database must scan all preceding records to reach the offset. For production systems with millions of records, cursor-based pagination would be preferable as it provides O(1) performance by using indexed lookups. However, since we don't control the backend, we follow the `next` URL provided by the API response.
+
+#### Step 24: Accessibility
+- [ ] **Modal accessibility:** Add `role="dialog"`, `aria-modal="true"`, focus trap, and Escape key handler to `Modal.jsx`
+- [ ] **Input labels:** Add proper `<label>` associations in `CommentSection.jsx`
+- [ ] **Focus states:** Add visible `:focus` styles to buttons in `Button.module.css`
+
+#### Step 25: Testing (Optional)
+- [ ] Unit tests for `usePosts`, `useLikes`, `useComments` hooks
+- [ ] Unit tests for `timeAgo` utility
+- [ ] Component tests for critical UI (Modal, Button)
+
+---
+
 ## Design Tokens
 
 ```css
