@@ -1,11 +1,12 @@
 import { Trash2, Pencil } from 'lucide-react';
 import styles from './PostCard.module.css';
 
-function PostCard({ post, onEdit, onDelete }) {
+function PostCard({ post, isOwner, onEdit, onDelete }) {
   return (
     <article className={styles.card}>
       <header className={styles.header}>
         <h3 className={styles.title}>{post.title}</h3>
+        {isOwner && (
           <div className={styles.actions}>
             <button
               className={styles.iconButton}
@@ -22,6 +23,7 @@ function PostCard({ post, onEdit, onDelete }) {
               <Pencil size={24} />
             </button>
           </div>
+        )}
       </header>
       <div className={styles.body}>
         <div className={styles.meta}>

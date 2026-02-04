@@ -1,11 +1,11 @@
 import PostCard from '../PostCard';
 import styles from './PostList.module.css';
 
-function PostList({ posts, onDelete, onEdit, loading }) {
+function PostList({ posts, currentUser, onEdit, onDelete, loading }) {
   if (loading) {
     return <div className={styles.loading}>Loading posts...</div>;
   }
-  
+
   if (posts.length === 0) {
     return <div className={styles.empty}>No posts yet. Be the first to post!</div>;
   }
@@ -16,6 +16,7 @@ function PostList({ posts, onDelete, onEdit, loading }) {
         <PostCard
           key={post.id}
           post={post}
+          isOwner={post.username === currentUser}
           onEdit={onEdit}
           onDelete={onDelete}
         />
