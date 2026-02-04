@@ -11,3 +11,14 @@
   flex-direction: column;
   gap: var(--spacing-lg);
 }
+
+@media (max-width: 768px) {
+  .page {
+    max-width: 100%;
+  }
+
+  .content {
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
+  }
+}
