@@ -70,12 +70,17 @@ cd codeleap-code-test
 npm install
 ```
 
-3. Start the development server:
+3. Configure environment variables:
+```bash
+cp .env.example .env
+```
+
+4. Start the development server:
 ```bash
 npm start
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Available Scripts
 
@@ -85,11 +90,19 @@ npm start
 | `npm test` | Launch the test runner |
 | `npm run build` | Build the app for production |
 
+## Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `REACT_APP_API_URL` | Base URL for the CodeLeap API |
+
+Copy `.env.example` to `.env` and configure as needed.
+
 ## API
 
 The application connects to the CodeLeap careers API.
 
-**Endpoint:** `https://dev.codeleap.co.uk/careers/`
+**Endpoint:** Configured via `REACT_APP_API_URL`
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|

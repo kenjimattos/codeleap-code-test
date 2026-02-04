@@ -160,16 +160,16 @@ src/
 > **Note:** These features require local state management since the API doesn't support likes/comments.
 
 #### Step 16: Like Button
-- [ ] Add heart icon to PostCard
-- [ ] Toggle like state on click
-- [ ] Display like count
-- [ ] Store likes in localStorage (per post ID)
+- [x] Add heart icon to PostCard
+- [x] Toggle like state on click
+- [x] Display like count
+- [x] Store likes in localStorage (per post ID)
 
 #### Step 17: Comments Section
-- [ ] Add comments area below post content
-- [ ] Comment input field with submit button
-- [ ] Display list of comments (username + text)
-- [ ] Store comments in localStorage (per post ID)
+- [x] Add comments area below post content
+- [x] Comment input field with submit button
+- [x] Display list of comments (username + text)
+- [x] Store comments in localStorage (per post ID)
 
 ---
 
