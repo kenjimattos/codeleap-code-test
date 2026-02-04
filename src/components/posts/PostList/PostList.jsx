@@ -1,7 +1,7 @@
 import PostCard from '../PostCard';
 import styles from './PostList.module.css';
 
-function PostList({ posts, currentUser, onEdit, onDelete, loading }) {
+function PostList({ posts, currentUser, onEdit, onDelete, loading, onLike, getLikes, isLiked }) {
   if (loading) {
     return <div className={styles.loading}>Loading posts...</div>;
   }
@@ -19,6 +19,9 @@ function PostList({ posts, currentUser, onEdit, onDelete, loading }) {
           isOwner={post.username === currentUser}
           onEdit={onEdit}
           onDelete={onDelete}
+          likes={getLikes(post.id)}
+          isLiked={isLiked(post.id)}
+          onLike={onLike}
         />
       ))}
     </div>
