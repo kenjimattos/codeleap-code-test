@@ -12,7 +12,7 @@ import styles from './Main.module.css';
 
 function Main() {
   const { username } = useUser();
-  const { posts, loading, createPost, updatePost, deletePost } = usePosts();
+  const { posts, loading, error, createPost, updatePost, deletePost } = usePosts();
   const { toggleLike, getLikes, isLiked } = useLikes(username);
   const { addComment, getComments } = useComments();
 
@@ -47,6 +47,11 @@ function Main() {
     <div className={styles.page}>
       <Header />
       <main className={styles.content}>
+        {error && (
+          <div className={styles.errorBanner}>
+            {error}
+          </div>
+        )}
         <CreatePost onSubmit={handleCreate} />
         <PostList
           posts={posts}

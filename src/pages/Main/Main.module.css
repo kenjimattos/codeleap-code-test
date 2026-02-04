@@ -12,6 +12,15 @@
   gap: var(--spacing-lg);
 }
 
+.errorBanner {
+  background-color: var(--color-danger);
+  color: var(--color-text-white);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-input);
+  font-size: var(--font-size-body);
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .page {
     max-width: 100%;
