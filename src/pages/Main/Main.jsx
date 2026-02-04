@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useUser } from '../../context/UserContext';
 import { usePosts } from '../../hooks/usePosts';
+import { useLikes } from '../../hooks/useLikes';
+import { useComments } from '../../hooks/useComments';
 import Header from '../../components/posts/Header';
 import CreatePost from '../../components/posts/CreatePost';
 import PostList from '../../components/posts/PostList';
@@ -11,6 +13,8 @@ import styles from './Main.module.css';
 function Main() {
   const { username } = useUser();
   const { posts, loading, createPost, updatePost, deletePost } = usePosts();
+  const { toggleLike, getLikes, isLiked } = useLikes(username);
+  const { addComment, getComments } = useComments();
 
   const [editingPost, setEditingPost] = useState(null);
   const [deletingPost, setDeletingPost] = useState(null);
@@ -50,6 +54,11 @@ function Main() {
           onEdit={handleEdit}
           onDelete={handleDelete}
           loading={loading}
+          onLike={toggleLike}
+          getLikes={getLikes}
+          isLiked={isLiked}
+          getComments={getComments}
+          onAddComment={(postId, text) => addComment(postId, username, text)}
         />
       </main>
 

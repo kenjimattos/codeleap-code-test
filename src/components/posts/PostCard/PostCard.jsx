@@ -1,8 +1,9 @@
-import { Trash2, Pencil } from 'lucide-react';
+import { Trash2, Pencil, Heart } from 'lucide-react';
 import { timeAgo } from '../../../utils/timeAgo';
+import CommentSection from '../CommentSection';
 import styles from './PostCard.module.css';
 
-function PostCard({ post, isOwner, onEdit, onDelete }) {
+function PostCard({ post, isOwner, onEdit, onDelete, likes, isLiked, onLike, comments, onAddComment }) {
   return (
     <article className={styles.card}>
       <header className={styles.header}>
@@ -32,6 +33,20 @@ function PostCard({ post, isOwner, onEdit, onDelete }) {
           <span className={styles.time}>{timeAgo(post.created_datetime)}</span>
         </div>
         <p className={styles.content}>{post.content}</p>
+        <div className={styles.likeSection}>
+          <button
+            className={`${styles.likeButton} ${isLiked ? styles.liked : ''}`}
+            onClick={() => onLike(post.id)}
+            aria-label={isLiked ? 'Unlike post' : 'Like post'}
+          >
+            <Heart size={20} fill={isLiked ? 'currentColor' : 'none'} />
+            <span>{likes}</span>
+          </button>
+        </div>
+        <CommentSection
+          comments={comments}
+          onAddComment={onAddComment}
+        />
       </div>
     </article>
   );
