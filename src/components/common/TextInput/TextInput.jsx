@@ -7,14 +7,16 @@ function TextInput({
   placeholder,
   type = 'text',
   multiline = false,
-  rows = 4
+  rows = 4,
+  maxLength
 }) {
   const inputProps = {
     className: styles.input,
     value,
     onChange: (e) => onChange(e.target.value),
     placeholder,
-    type
+    type,
+    maxLength
   };
 
   return (

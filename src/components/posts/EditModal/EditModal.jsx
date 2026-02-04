@@ -32,6 +32,7 @@ function EditModal({ post, onClose, onSave }) {
           value={title}
           onChange={setTitle}
           placeholder="Hello world"
+          maxLength={256}
         />
         <TextInput
           label="Content"
@@ -40,6 +41,7 @@ function EditModal({ post, onClose, onSave }) {
           placeholder="Content here"
           multiline
           rows={4}
+          maxLength={2000}
         />
       </div>
       <div className={styles.actions}>

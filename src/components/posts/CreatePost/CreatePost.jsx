@@ -26,6 +26,7 @@ function CreatePost({ onSubmit }) {
         value={title}
         onChange={setTitle}
         placeholder="Hello world"
+        maxLength={256}
       />
       <TextInput
         label="Content"
@@ -34,6 +35,7 @@ function CreatePost({ onSubmit }) {
         placeholder="Content here"
         multiline
         rows={4}
+        maxLength={2000}
       />
       <div className={styles.actions}>
         <Button type="submit" disabled={isDisabled}>
