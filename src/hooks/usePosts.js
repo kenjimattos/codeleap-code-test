@@ -4,8 +4,12 @@ import * as api from '../services/api';
 export function usePosts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState(null);
+  const [nextUrl, setNextUrl] = useState(null);
   const abortControllerRef = useRef(null);
+
+  const hasMore = nextUrl !== null;
 
   const fetchPosts = useCallback(async () => {
     if (abortControllerRef.current) {
@@ -18,6 +22,7 @@ export function usePosts() {
       setError(null);
       const data = await api.getPosts();
       setPosts(data.results || []);
+      setNextUrl(data.next || null);
     } catch (err) {
       if (err.name !== 'AbortError') {
         setError(err.message);
@@ -26,6 +31,22 @@ export function usePosts() {
       setLoading(false);
     }
   }, []);
+
+  const loadMore = useCallback(async () => {
+    if (!nextUrl || loadingMore) return;
+
+    try {
+      setLoadingMore(true);
+      setError(null);
+      const data = await api.getPosts(nextUrl);
+      setPosts(prev => [...prev, ...(data.results || [])]);
+      setNextUrl(data.next || null);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoadingMore(false);
+    }
+  }, [nextUrl, loadingMore]);
 
   const createPost = useCallback(async (username, title, content) => {
     try {
@@ -70,7 +91,10 @@ export function usePosts() {
   return {
     posts,
     loading,
+    loadingMore,
     error,
+    hasMore,
+    loadMore,
     createPost,
     updatePost,
     deletePost,

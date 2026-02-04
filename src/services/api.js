@@ -4,8 +4,8 @@ if (!API_URL) {
   console.error('REACT_APP_API_URL is not configured. Please check your .env file.');
 }
 
-export async function getPosts() {
-  const response = await fetch(API_URL);
+export async function getPosts(url = API_URL) {
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error('Failed to fetch posts');
   }

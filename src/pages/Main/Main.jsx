@@ -12,7 +12,7 @@ import styles from './Main.module.css';
 
 function Main() {
   const { username } = useUser();
-  const { posts, loading, error, createPost, updatePost, deletePost } = usePosts();
+  const { posts, loading, loadingMore, error, hasMore, loadMore, createPost, updatePost, deletePost } = usePosts();
   const { toggleLike, getLikes, isLiked, removeLikes } = useLikes(username);
   const { addComment, getComments, removeComments } = useComments();
 
@@ -62,6 +62,9 @@ function Main() {
           onEdit={handleEdit}
           onDelete={handleDelete}
           loading={loading}
+          loadingMore={loadingMore}
+          hasMore={hasMore}
+          onLoadMore={loadMore}
           onLike={toggleLike}
           getLikes={getLikes}
           isLiked={isLiked}
