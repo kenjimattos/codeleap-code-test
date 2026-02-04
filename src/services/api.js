@@ -9,15 +9,17 @@ export async function getPosts() {
 }
 
 export async function createPost(username, title, content) {
-  const newPost = {
-    id: nextId++,
-    username,
-    title,
-    content,
-    created_datetime: new Date().toISOString()
-  };
-  mockPosts.unshift(newPost);
-  return newPost;
+  const response = await fetch(API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ username, title, content }),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to create post');
+  }
+  return response.json();
 }
 
 export async function updatePost(id, title, content) {
