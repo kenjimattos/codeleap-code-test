@@ -31,7 +31,7 @@
 @media (max-width: 768px) {
   .input {
     padding: var(--spacing-sm);
-    min-height: 44px;
+    min-height: var(--touch-target-min);
     font-size: var(--font-size-body);
   }
 }

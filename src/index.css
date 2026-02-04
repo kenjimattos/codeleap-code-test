@@ -37,6 +37,14 @@
   --border-radius-card: 16px;
   --border-radius-button: 8px;
   --border-radius-input: 8px;
+
+  /* Touch targets */
+  --touch-target-min: 44px;
+
+  /* Container widths */
+  --container-width-sm: 500px;
+  --container-width-md: 660px;
+  --container-width-lg: 800px;
 }
 
 * {
