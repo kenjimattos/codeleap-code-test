@@ -68,6 +68,33 @@
   white-space: pre-wrap;
 }
 
+.likeSection {
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+}
+
+.likeButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-body);
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius-button);
+  transition: color 0.2s ease;
+}
+
+.likeButton:hover {
+  color: var(--color-danger);
+}
+
+.liked {
+  color: var(--color-danger);
+}
+
 @media (max-width: 768px) {
   .header {
     padding: var(--spacing-md);
