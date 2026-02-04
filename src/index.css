@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+  /* Colors */
+  --color-primary: #7695EC;
+  --color-danger: #FF5151;
+  --color-success: #47B960;
+  --color-text: #000000;
+  --color-text-muted: #777777;
+  --color-text-white: #FFFFFF;
+  --color-border: #999999;
+  --color-input-border: #777777;
+  --color-placeholder: #CCCCCC;
+  --color-background: #FFFFFF;
+  --color-page-background: #DDDDDD;
+
+  /* Typography */
+  --font-family: 'Roboto', sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+  --font-size-title: 22px;
+  --font-size-body: 18px;
+  --font-size-label: 16px;
+  --font-size-small: 14px;
+
+  /* Spacing */
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+
+  /* Borders */
+  --border-width: 1px;
+  --border-radius-card: 16px;
+  --border-radius-button: 8px;
+  --border-radius-input: 8px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-page-background);
+  color: var(--color-text);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
