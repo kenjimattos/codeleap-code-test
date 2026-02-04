@@ -207,12 +207,12 @@ src/
 
 ---
 
-### Phase 5: Accessibility & Testing
+### Phase 5: Accessibility & Testing (COMPLETED)
 
-#### Step 24: Accessibility
-- [ ] **Modal accessibility:** Add `role="dialog"`, `aria-modal="true"`, focus trap, and Escape key handler to `Modal.jsx`
-- [ ] **Input labels:** Add proper `<label>` associations in `CommentSection.jsx`
-- [ ] **Focus states:** Add visible `:focus` styles to buttons in `Button.module.css`
+#### Step 24: Accessibility ✅
+- [x] **Modal accessibility:** Add `role="dialog"`, `aria-modal="true"`, focus trap, and Escape key handler to `Modal.jsx`
+- [x] **Input labels:** Add proper `<label>` associations in `CommentSection.jsx`
+- [x] **Focus states:** Add visible `:focus` styles to buttons in `Button.module.css`
 
 #### Step 25: Testing
 
@@ -481,10 +481,10 @@ describe('Button', () => {
 });
 ```
 
-##### Test Setup
-- [ ] Install testing dependencies: `npm install --save-dev @testing-library/react @testing-library/jest-dom`
-- [ ] Configure Jest in `package.json` or `jest.config.js`
-- [ ] Create test files following the examples above
+##### Test Setup ✅
+- [x] Install testing dependencies: `npm install --save-dev @testing-library/react @testing-library/jest-dom`
+- [x] Configure Jest in `package.json` or `jest.config.js`
+- [x] Create test files following the examples above
 
 ---
 
