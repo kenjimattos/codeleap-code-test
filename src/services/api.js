@@ -37,11 +37,11 @@ export async function updatePost(id, title, content) {
 }
 
 export async function deletePost(id) {
-
-  const index = mockPosts.findIndex(post => post.id === id);
-  if (index === -1) {
-    throw new Error('Post not found');
+  const response = await fetch(`${API_URL}${id}/`, {
+    method: 'DELETE',
+  });
+  if (!response.ok) {
+    throw new Error('Failed to delete post');
   }
-  mockPosts.splice(index, 1);
   return true;
 }
