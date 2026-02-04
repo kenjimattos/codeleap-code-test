@@ -3,12 +3,20 @@ import { useState, useCallback } from 'react';
 const STORAGE_KEY = 'codeleap_likes';
 
 function getLikesFromStorage() {
-  const stored = localStorage.getItem(STORAGE_KEY);
-  return stored ? JSON.parse(stored) : {};
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : {};
+  } catch {
+    return {};
+  }
 }
 
 function saveLikesToStorage(likes) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(likes));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(likes));
+  } catch {
+    // Storage full or unavailable (e.g., private browsing)
+  }
 }
 
 export function useLikes(username) {
@@ -42,5 +50,13 @@ export function useLikes(username) {
     return likesData[postId]?.users.includes(username) || false;
   }, [likesData, username]);
 
-  return { toggleLike, getLikes, isLiked };
+  const removeLikes = useCallback((postId) => {
+    setLikesData((prev) => {
+      const { [postId]: _, ...rest } = prev;
+      saveLikesToStorage(rest);
+      return rest;
+    });
+  }, []);
+
+  return { toggleLike, getLikes, isLiked, removeLikes };
 }

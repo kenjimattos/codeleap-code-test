@@ -22,6 +22,7 @@ function CommentSection({ comments, onAddComment }) {
           placeholder="Write a comment..."
           value={text}
           onChange={(e) => setText(e.target.value)}
+          maxLength={500}
         />
         <button
           type="submit"

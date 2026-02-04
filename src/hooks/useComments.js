@@ -3,12 +3,20 @@ import { useState, useCallback } from 'react';
 const STORAGE_KEY = 'codeleap_comments';
 
 function getCommentsFromStorage() {
-  const stored = localStorage.getItem(STORAGE_KEY);
-  return stored ? JSON.parse(stored) : {};
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : {};
+  } catch {
+    return {};
+  }
 }
 
 function saveCommentsToStorage(comments) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+  } catch {
+    // Storage full or unavailable (e.g., private browsing)
+  }
 }
 
 export function useComments() {
@@ -18,7 +26,7 @@ export function useComments() {
     if (!text.trim()) return;
 
     const newComment = {
-      id: Date.now(),
+      id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       username,
       text: text.trim(),
       created_datetime: new Date().toISOString(),
@@ -39,5 +47,13 @@ export function useComments() {
     return commentsData[postId] || [];
   }, [commentsData]);
 
-  return { addComment, getComments };
+  const removeComments = useCallback((postId) => {
+    setCommentsData((prev) => {
+      const { [postId]: _, ...rest } = prev;
+      saveCommentsToStorage(rest);
+      return rest;
+    });
+  }, []);
+
+  return { addComment, getComments, removeComments };
 }

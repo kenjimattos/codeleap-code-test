@@ -12,9 +12,9 @@ import styles from './Main.module.css';
 
 function Main() {
   const { username } = useUser();
-  const { posts, loading, createPost, updatePost, deletePost } = usePosts();
-  const { toggleLike, getLikes, isLiked } = useLikes(username);
-  const { addComment, getComments } = useComments();
+  const { posts, loading, loadingMore, error, hasMore, loadMore, createPost, updatePost, deletePost } = usePosts();
+  const { toggleLike, getLikes, isLiked, removeLikes } = useLikes(username);
+  const { addComment, getComments, removeComments } = useComments();
 
   const [editingPost, setEditingPost] = useState(null);
   const [deletingPost, setDeletingPost] = useState(null);
@@ -38,7 +38,10 @@ function Main() {
 
   const handleConfirmDelete = async () => {
     if (deletingPost) {
-      await deletePost(deletingPost.id);
+      const postId = deletingPost.id;
+      await deletePost(postId);
+      removeLikes(postId);
+      removeComments(postId);
       setDeletingPost(null);
     }
   };
@@ -47,6 +50,11 @@ function Main() {
     <div className={styles.page}>
       <Header />
       <main className={styles.content}>
+        {error && (
+          <div className={styles.errorBanner}>
+            {error}
+          </div>
+        )}
         <CreatePost onSubmit={handleCreate} />
         <PostList
           posts={posts}
@@ -54,6 +62,9 @@ function Main() {
           onEdit={handleEdit}
           onDelete={handleDelete}
           loading={loading}
+          loadingMore={loadingMore}
+          hasMore={hasMore}
+          onLoadMore={loadMore}
           onLike={toggleLike}
           getLikes={getLikes}
           isLiked={isLiked}

@@ -1,7 +1,22 @@
 import PostCard from '../PostCard';
+import Button from '../../common/Button';
 import styles from './PostList.module.css';
 
-function PostList({ posts, currentUser, onEdit, onDelete, loading, onLike, getLikes, isLiked, getComments, onAddComment }) {
+function PostList({
+  posts,
+  currentUser,
+  onEdit,
+  onDelete,
+  loading,
+  loadingMore,
+  hasMore,
+  onLoadMore,
+  onLike,
+  getLikes,
+  isLiked,
+  getComments,
+  onAddComment
+}) {
   if (loading) {
     return <div className={styles.loading}>Loading posts...</div>;
   }
@@ -26,6 +41,17 @@ function PostList({ posts, currentUser, onEdit, onDelete, loading, onLike, getLi
           onAddComment={(text) => onAddComment(post.id, text)}
         />
       ))}
+      {hasMore && (
+        <div className={styles.loadMoreContainer}>
+          <Button
+            variant="secondary"
+            onClick={onLoadMore}
+            disabled={loadingMore}
+          >
+            {loadingMore ? 'Loading...' : 'Load more'}
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
