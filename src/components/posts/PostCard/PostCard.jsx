@@ -1,4 +1,5 @@
 import { Trash2, Pencil } from 'lucide-react';
+import { timeAgo } from '../../../utils/timeAgo';
 import styles from './PostCard.module.css';
 
 function PostCard({ post, isOwner, onEdit, onDelete }) {
@@ -28,6 +29,7 @@ function PostCard({ post, isOwner, onEdit, onDelete }) {
       <div className={styles.body}>
         <div className={styles.meta}>
           <span className={styles.username}>@{post.username}</span>
+          <span className={styles.time}>{timeAgo(post.created_datetime)}</span>
         </div>
         <p className={styles.content}>{post.content}</p>
       </div>
