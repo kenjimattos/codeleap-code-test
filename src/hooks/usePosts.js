@@ -28,6 +28,16 @@ export function usePosts() {
       setError(err.message);
     }
   }, [fetchPosts]);
+  
+  const deletePost = useCallback(async (id) => {
+    try {
+      setError(null);
+      await api.deletePost(id);
+      await fetchPosts();
+    } catch (err) {
+      setError(err.message);
+    }
+  }, [fetchPosts]);
 
   useEffect(() => {
     fetchPosts();
@@ -38,6 +48,7 @@ export function usePosts() {
     loading,
     error,
     createPost,
+    deletePost,
     refetch: fetchPosts
   };
 }

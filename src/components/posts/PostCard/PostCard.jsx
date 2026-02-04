@@ -1,7 +1,7 @@
 import { Trash2, Pencil } from 'lucide-react';
 import styles from './PostCard.module.css';
 
-function PostCard({ post }) {
+function PostCard({ post, onDelete }) {
   return (
     <article className={styles.card}>
       <header className={styles.header}>
@@ -9,6 +9,7 @@ function PostCard({ post }) {
           <div className={styles.actions}>
             <button
               className={styles.iconButton}
+              onClick={() => onDelete(post)}
               aria-label="Delete post"
             >
               <Trash2 size={24} />

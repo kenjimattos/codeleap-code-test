@@ -38,3 +38,12 @@ export async function createPost(username, title, content) {
   return newPost;
 }
 
+export async function deletePost(id) {
+  const index = mockPosts.findIndex(post => post.id === id);
+  if (index === -1) {
+    throw new Error('Post not found');
+  }
+  mockPosts.splice(index, 1);
+  return true;
+}
+
