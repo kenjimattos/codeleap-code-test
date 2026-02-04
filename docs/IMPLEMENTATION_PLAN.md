@@ -1,0 +1,210 @@
+# CodeLeap Network - Implementation Plan
+
+## Overview
+
+A simple social posting application where users can create, read, update, and delete posts.
+
+**API Endpoint:** `https://dev.codeleap.co.uk/careers/`
+
+**Data Structure:**
+```json
+{
+  "id": number,
+  "username": "string",
+  "created_datetime": "datetime",
+  "title": "string",
+  "content": "string"
+}
+```
+
+---
+
+## Technology Decision
+
+**Pure React with CSS Modules**
+
+Reasons:
+- Material UI adds unnecessary bundle size for this simple UI
+- The design is minimal and custom - no complex components needed
+- CSS Modules provide scoped styling without extra dependencies
+- Clean, readable code is the priority for this technical assessment
+- Easier to demonstrate React fundamentals without library abstractions
+
+**Dependencies:**
+- `react-router-dom` - For routing between Login and Main pages
+
+---
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── common/                 # Reusable UI components
+│   │   ├── Button/
+│   │   ├── Modal/
+│   │   └── TextInput/
+│   └── posts/                  # Post-related components
+│       ├── Header/
+│       ├── CreatePost/
+│       ├── PostCard/
+│       ├── PostList/
+│       ├── EditModal/
+│       └── DeleteModal/
+├── pages/
+│   ├── Login/
+│   └── Main/
+├── services/
+│   └── api.js                  # Mock API (to be replaced with real API)
+├── hooks/
+│   └── usePosts.js
+├── context/
+│   └── UserContext.jsx
+├── utils/
+│   └── timeAgo.js
+├── App.js
+├── App.css
+├── index.js
+└── index.css                   # Global styles and CSS variables
+```
+
+---
+
+## Implementation Progress
+
+### Phase 1: Frontend Development (COMPLETED)
+
+#### Step 1: Base Setup & Global Styles ✅
+- [x] Set up global CSS variables (colors, fonts, spacing, borders)
+- [x] Configure Roboto font
+- [x] Create design tokens system
+
+#### Step 2: Reusable UI Components ✅
+- [x] **Button** - Primary, secondary, danger, success variants with disabled state
+- [x] **TextInput** - Text input and textarea with placeholder styling
+- [x] **Modal** - Overlay with centered content box
+
+#### Step 3: User Context & Login Page ✅
+- [x] Create UserContext to store username
+- [x] Build Login page with username input
+- [x] Store username in localStorage for persistence
+- [x] Redirect to main page after login
+
+#### Step 4: Mock API Service ✅
+- [x] Mock data
+- [x] GET, POST, PATCH, DELETE operations
+- [x] Ready to be replaced with real API calls
+
+#### Step 5: Posts Hook ✅
+- [x] usePosts hook for data management
+- [x] Handle loading and error states
+- [x] Implement create, update, delete operations
+
+#### Step 6: Header Component ✅
+- [x] Blue background (#7695EC)
+- [x] "CodeLeap Network" title
+
+#### Step 7: CreatePost Component ✅
+- [x] Card with "What's on your mind?" title
+- [x] Title input field
+- [x] Content textarea
+- [x] Create button (disabled when fields empty)
+
+#### Step 8: PostCard Component ✅
+- [x] Blue header with post title
+- [x] Delete/Edit icons (visible only for own posts)
+- [x] Username and relative time display
+- [x] Post content
+
+#### Step 9: PostList Component ✅
+- [x] Render list of PostCard components
+- [x] Loading state
+- [x] Empty state
+
+#### Step 10: Edit Modal ✅
+- [x] Modal with "Edit item" title
+- [x] Pre-filled title and content fields
+- [x] Cancel and Save buttons
+
+#### Step 11: Delete Modal ✅
+- [x] Modal with confirmation message
+- [x] Cancel and Delete buttons
+
+#### Step 12: Main Page Assembly ✅
+- [x] Combine Header, CreatePost, PostList
+- [x] Wire up modals for edit/delete
+- [x] Handle all CRUD operations
+
+#### Step 13: App Routing ✅
+- [x] Set up routing (Login → Main)
+- [x] Protected route (redirect to login if no username)
+- [x] Public route (redirect to main if logged in)
+
+---
+
+### Phase 2: Pending Tasks
+
+#### Step 14: Responsive Design
+- [ ] Mobile breakpoints (max-width: 768px)
+- [ ] Fluid container widths
+- [ ] Touch-friendly button sizes
+
+#### Step 15: Real API Integration
+- [ ] Replace mock API with real endpoint
+- [ ] Handle API errors
+- [ ] Add pagination/infinite scroll (bonus)
+
+---
+
+## Design Tokens
+
+```css
+/* Colors */
+--color-primary: #7695EC;
+--color-danger: #FF5151;
+--color-success: #47B960;
+--color-text: #000000;
+--color-text-muted: #777777;
+--color-text-white: #FFFFFF;
+--color-border: #999999;
+--color-input-border: #777777;
+--color-placeholder: #CCCCCC;
+--color-background: #FFFFFF;
+--color-page-background: #DDDDDD;
+
+/* Typography */
+--font-family: 'Roboto', sans-serif;
+--font-weight-regular: 400;
+--font-weight-bold: 700;
+--font-size-title: 22px;
+--font-size-body: 18px;
+--font-size-label: 16px;
+--font-size-small: 14px;
+
+/* Spacing */
+--spacing-xxs: 4px;
+--spacing-xs: 8px;
+--spacing-sm: 12px;
+--spacing-md: 16px;
+--spacing-lg: 24px;
+--spacing-xl: 32px;
+--spacing-xxl: 48px;
+
+/* Borders */
+--border-width: 1px;
+--border-radius-card: 16px;
+--border-radius-button: 8px;
+--border-radius-input: 8px;
+```
+
+---
+
+## Notes
+
+- Username stored in localStorage (simple persistence)
+- Edit/Delete icons only shown when `post.username === currentUser`
+- Button disabled state: reduced opacity + not-allowed cursor
+- Time display: relative format ("25 minutes ago")
+- No external UI library - pure CSS for clean, readable code
+- All CSS values use design tokens for consistency
+- Components organized by domain (common, posts)
