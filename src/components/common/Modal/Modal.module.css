@@ -16,7 +16,7 @@
   border-radius: var(--border-radius-card);
   padding: var(--spacing-lg);
   width: 100%;
-  max-width: 660px;
+  max-width: var(--container-width-md);
   margin: 0 var(--spacing-lg);
   border: var(--border-width) solid var(--color-border);
 }

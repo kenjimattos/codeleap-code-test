@@ -10,7 +10,7 @@ A simple social posting application built with React where users can create, rea
 - Edit your own posts
 - Delete your own posts with confirmation
 - Relative time display (e.g., "5 minutes ago")
-- Basic responsive design (fluid layout with max-width containers)
+- Mobile responsive design with touch-friendly targets
 
 ## Tech Stack
 
@@ -87,9 +87,16 @@ npm start
 
 ## API
 
-> **Note:** The application currently uses **mock data** for development. The API service is ready to be connected to the real endpoint.
+The application connects to the CodeLeap careers API.
 
-**Target Endpoint:** `https://dev.codeleap.co.uk/careers/`
+**Endpoint:** `https://dev.codeleap.co.uk/careers/`
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/` | Fetch all posts |
+| POST | `/` | Create a new post |
+| PATCH | `/{id}/` | Update a post |
+| DELETE | `/{id}/` | Delete a post |
 
 **Data Structure:**
 ```json

@@ -27,3 +27,11 @@
 .input:focus {
   border-color: var(--color-primary);
 }
+
+@media (max-width: 768px) {
+  .input {
+    padding: var(--spacing-sm);
+    min-height: var(--touch-target-min);
+    font-size: var(--font-size-body);
+  }
+}
