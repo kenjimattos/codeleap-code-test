@@ -1,5 +1,9 @@
 const API_URL = process.env.REACT_APP_API_URL;
 
+if (!API_URL) {
+  console.error('REACT_APP_API_URL is not configured. Please check your .env file.');
+}
+
 export async function getPosts() {
   const response = await fetch(API_URL);
   if (!response.ok) {
