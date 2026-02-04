@@ -13,8 +13,8 @@ import styles from './Main.module.css';
 function Main() {
   const { username } = useUser();
   const { posts, loading, error, createPost, updatePost, deletePost } = usePosts();
-  const { toggleLike, getLikes, isLiked } = useLikes(username);
-  const { addComment, getComments } = useComments();
+  const { toggleLike, getLikes, isLiked, removeLikes } = useLikes(username);
+  const { addComment, getComments, removeComments } = useComments();
 
   const [editingPost, setEditingPost] = useState(null);
   const [deletingPost, setDeletingPost] = useState(null);
@@ -38,7 +38,10 @@ function Main() {
 
   const handleConfirmDelete = async () => {
     if (deletingPost) {
-      await deletePost(deletingPost.id);
+      const postId = deletingPost.id;
+      await deletePost(postId);
+      removeLikes(postId);
+      removeComments(postId);
       setDeletingPost(null);
     }
   };

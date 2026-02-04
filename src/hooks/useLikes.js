@@ -50,5 +50,13 @@ export function useLikes(username) {
     return likesData[postId]?.users.includes(username) || false;
   }, [likesData, username]);
 
-  return { toggleLike, getLikes, isLiked };
+  const removeLikes = useCallback((postId) => {
+    setLikesData((prev) => {
+      const { [postId]: _, ...rest } = prev;
+      saveLikesToStorage(rest);
+      return rest;
+    });
+  }, []);
+
+  return { toggleLike, getLikes, isLiked, removeLikes };
 }

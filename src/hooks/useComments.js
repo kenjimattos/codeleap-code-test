@@ -47,5 +47,13 @@ export function useComments() {
     return commentsData[postId] || [];
   }, [commentsData]);
 
-  return { addComment, getComments };
+  const removeComments = useCallback((postId) => {
+    setCommentsData((prev) => {
+      const { [postId]: _, ...rest } = prev;
+      saveCommentsToStorage(rest);
+      return rest;
+    });
+  }, []);
+
+  return { addComment, getComments, removeComments };
 }
