@@ -23,13 +23,17 @@ export async function createPost(username, title, content) {
 }
 
 export async function updatePost(id, title, content) {
-
-  const index = mockPosts.findIndex(post => post.id === id);
-  if (index === -1) {
-    throw new Error('Post not found');
+  const response = await fetch(`${API_URL}${id}/`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ title, content }),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to update post');
   }
-  mockPosts[index] = { ...mockPosts[index], title, content };
-  return mockPosts[index];
+  return response.json();
 }
 
 export async function deletePost(id) {
