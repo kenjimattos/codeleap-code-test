@@ -8,6 +8,7 @@ export function usePosts() {
   const [error, setError] = useState(null);
   const [nextUrl, setNextUrl] = useState(null);
   const abortControllerRef = useRef(null);
+  const loadMoreControllerRef = useRef(null);
 
   const hasMore = nextUrl !== null;
 
@@ -26,7 +27,7 @@ export function usePosts() {
       setNextUrl(data.next || null);
     } catch (err) {
       if (err.name !== 'AbortError') {
-        setError(err.message);
+        setError(err);
       }
     } finally {
       setLoading(false);
@@ -36,14 +37,22 @@ export function usePosts() {
   const loadMore = useCallback(async () => {
     if (!nextUrl || loadingMore) return;
 
+    if (loadMoreControllerRef.current) {
+      loadMoreControllerRef.current.abort();
+    }
+    loadMoreControllerRef.current = new AbortController();
+    const { signal } = loadMoreControllerRef.current;
+
     try {
       setLoadingMore(true);
       setError(null);
-      const data = await api.getPosts(nextUrl);
+      const data = await api.getPosts(nextUrl, signal);
       setPosts(prev => [...prev, ...(data.results || [])]);
       setNextUrl(data.next || null);
     } catch (err) {
-      setError(err.message);
+      if (err.name !== 'AbortError') {
+        setError(err);
+      }
     } finally {
       setLoadingMore(false);
     }
@@ -55,7 +64,7 @@ export function usePosts() {
       await api.createPost(username, title, content);
       await fetchPosts();
     } catch (err) {
-      setError(err.message);
+      setError(err);
     }
   }, [fetchPosts]);
 
@@ -65,7 +74,7 @@ export function usePosts() {
       await api.updatePost(id, title, content);
       await fetchPosts();
     } catch (err) {
-      setError(err.message);
+      setError(err);
     }
   }, [fetchPosts]);
 
@@ -75,7 +84,7 @@ export function usePosts() {
       await api.deletePost(id);
       await fetchPosts();
     } catch (err) {
-      setError(err.message);
+      setError(err);
     }
   }, [fetchPosts]);
 
@@ -85,6 +94,9 @@ export function usePosts() {
     return () => {
       if (abortControllerRef.current) {
         abortControllerRef.current.abort();
+      }
+      if (loadMoreControllerRef.current) {
+        loadMoreControllerRef.current.abort();
       }
     };
   }, [fetchPosts]);

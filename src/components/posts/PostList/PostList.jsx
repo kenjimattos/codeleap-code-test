@@ -38,7 +38,7 @@ function PostList({
           isLiked={isLiked(post.id)}
           onLike={onLike}
           comments={getComments(post.id)}
-          onAddComment={(text) => onAddComment(post.id, text)}
+          onAddComment={onAddComment}
         />
       ))}
       {hasMore && (

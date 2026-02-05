@@ -4,6 +4,10 @@
 
 CodeLeap Network is a simple social posting application built with React where users can create, read, update, and delete posts.
 
+### The Journey
+
+What started as a straightforward technical assessment evolved into something much more ambitious. The initial proposition was simple: build a basic CRUD application following the provided requirements. However, powered by generative AI collaboration, the project quickly scaled beyond its original scope. Through iterative phases of development, we added social features (likes and comments), comprehensive accessibility support, a full test suite, performance optimizations, and professional-grade code quality tooling. This journey demonstrates how AI-assisted development can transform a simple exercise into a production-ready application while maintaining clean architecture and best practices.
+
 ## Features
 
 ### Core Features
@@ -113,6 +117,9 @@ npm start
 | `npm test` | Launch the test runner in watch mode |
 | `npm test -- --coverage` | Run tests with coverage report |
 | `npm run build` | Build the app for production |
+| `npm run lint` | Run ESLint to check code quality |
+| `npm run lint:fix` | Run ESLint and fix auto-fixable issues |
+| `npm run format` | Format code with Prettier |
 
 ## Testing
 
@@ -220,6 +227,7 @@ The application connects to the CodeLeap careers API.
 3. **Phase 4**: Bug fixes, error handling, pagination
 4. **Phase 5**: Accessibility and testing
 5. **Phase 6**: Technical debt fixes and quality improvements
+6. **Phase 7**: Performance optimizations and code quality tooling
 
 See [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) for detailed implementation history.
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useUser } from '../../context/UserContext';
 import { usePosts } from '../../hooks/usePosts';
 import { useLikes } from '../../hooks/useLikes';
@@ -20,24 +20,24 @@ function Main() {
   const [editingPost, setEditingPost] = useState(null);
   const [deletingPost, setDeletingPost] = useState(null);
 
-  const handleCreate = async (title, content) => {
+  const handleCreate = useCallback(async (title, content) => {
     await createPost(username, title, content);
-  };
+  }, [createPost, username]);
 
-  const handleEdit = (post) => {
+  const handleEdit = useCallback((post) => {
     setEditingPost(post);
-  };
+  }, []);
 
-  const handleDelete = (post) => {
+  const handleDelete = useCallback((post) => {
     setDeletingPost(post);
-  };
+  }, []);
 
-  const handleSaveEdit = async (id, title, content) => {
+  const handleSaveEdit = useCallback(async (id, title, content) => {
     await updatePost(id, title, content);
     setEditingPost(null);
-  };
+  }, [updatePost]);
 
-  const handleConfirmDelete = async () => {
+  const handleConfirmDelete = useCallback(async () => {
     if (deletingPost) {
       const postId = deletingPost.id;
       await deletePost(postId);
@@ -45,7 +45,11 @@ function Main() {
       removeComments(postId);
       setDeletingPost(null);
     }
-  };
+  }, [deletingPost, deletePost, removeLikes, removeComments]);
+
+  const handleAddComment = useCallback((postId, text) => {
+    addComment(postId, username, text);
+  }, [addComment, username]);
 
   return (
     <div className={styles.page}>
@@ -70,7 +74,7 @@ function Main() {
           getLikes={getLikes}
           isLiked={isLiked}
           getComments={getComments}
-          onAddComment={(postId, text) => addComment(postId, username, text)}
+          onAddComment={handleAddComment}
         />
       </main>
 
