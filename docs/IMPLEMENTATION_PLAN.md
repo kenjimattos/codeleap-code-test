@@ -560,6 +560,13 @@ describe('Button', () => {
 - [x] Moved function creation to `PostCard.jsx` (inside memoized component)
 - [x] Prevents unnecessary re-renders of PostCard when parent re-renders
 
+#### Step 40: Fix React 19 ESLint Build Errors ✅
+- [x] Fixed unescaped apostrophe in `CreatePost.jsx` (`What's` → `What&apos;s`)
+- [x] Fixed `react-hooks/set-state-in-effect` in `EditModal.jsx`
+  - Replaced `useEffect` + `setState` with direct state initialization from props
+  - React 19 flags synchronous setState inside effects as anti-pattern
+- [x] Production build now compiles successfully on Vercel
+
 ---
 
 ## Design Tokens
