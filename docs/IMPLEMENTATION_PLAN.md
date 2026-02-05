@@ -488,6 +488,41 @@ describe('Button', () => {
 
 ---
 
+### Phase 6: Technical Debt & Quality Improvements (COMPLETED)
+
+#### Step 26: Fix AbortController Integration ✅
+- [x] Add `signal` parameter to `getPosts()` in `api.js`
+- [x] Pass `controller.signal` to `getPosts()` in `usePosts.js`
+- [x] Check for aborted signal in mock mode
+
+#### Step 27: Fix Duplicate DOM IDs ✅
+- [x] Add `postId` prop to `CommentSection` component
+- [x] Generate unique input IDs using `comment-input-${postId}`
+- [x] Update label `htmlFor` to match unique ID
+
+#### Step 28: Improve Configuration Error Handling ✅
+- [x] Create `ConfigurationError` class in `api.js`
+- [x] Add `validateApiUrl()` function that throws descriptive error
+- [x] Validate URL before all API requests
+
+#### Step 29: Isolate Mock Data from Production Bundle ✅
+- [x] Create `src/services/mockData.js` with mock posts and helpers
+- [x] Use dynamic `import()` to load mock data only when needed
+- [x] Production bundle no longer includes mock data
+
+#### Step 30: Normalize Error Messages ✅
+- [x] Create `src/utils/errorMessages.js` utility
+- [x] Map common errors to user-friendly English messages
+- [x] Update `Main.jsx` to use `normalizeError()` for error display
+
+#### Step 31: Expand Test Coverage ✅
+- [x] Create `src/services/api.test.js` with CRUD and pagination tests
+- [x] Create `src/hooks/usePosts.test.js` with hook lifecycle tests
+- [x] Create `src/utils/errorMessages.test.js` for error normalization
+- [x] Total: 37 tests passing
+
+---
+
 ## Design Tokens
 
 ```css
