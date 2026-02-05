@@ -75,9 +75,14 @@ if (!USE_MOCK && !API_URL) {
   console.error('REACT_APP_API_URL is not configured. Please check your .env file.');
 }
 
-export async function getPosts(url = API_URL) {
+export async function getPosts(url = API_URL, signal = null) {
   if (USE_MOCK) {
-    await delay(800); // Simula latência de rede
+    await delay(800); // Simulates network latency
+
+    // Check if request was aborted
+    if (signal?.aborted) {
+      throw new DOMException('Aborted', 'AbortError');
+    }
 
     // Parse offset from mock URL
     let offset = 0;
@@ -90,7 +95,7 @@ export async function getPosts(url = API_URL) {
     return getMockPaginatedPosts(offset);
   }
 
-  const response = await fetch(url);
+  const response = await fetch(url, { signal });
   if (!response.ok) {
     throw new Error('Failed to fetch posts');
   }

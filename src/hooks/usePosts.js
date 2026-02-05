@@ -16,11 +16,12 @@ export function usePosts() {
       abortControllerRef.current.abort();
     }
     abortControllerRef.current = new AbortController();
+    const { signal } = abortControllerRef.current;
 
     try {
       setLoading(true);
       setError(null);
-      const data = await api.getPosts();
+      const data = await api.getPosts(undefined, signal);
       setPosts(data.results || []);
       setNextUrl(data.next || null);
     } catch (err) {
