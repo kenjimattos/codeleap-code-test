@@ -2,6 +2,8 @@
 
 **Technical Assessment** - This project was developed by **Kenji Mattos Kinoshita** as part of a technical evaluation for CodeLeap.
 
+**Live Demo:** [https://codeleap-code-test-lac.vercel.app/](https://codeleap-code-test-lac.vercel.app/)
+
 CodeLeap Network is a simple social posting application built with React where users can create, read, update, and delete posts.
 
 ### The Journey
