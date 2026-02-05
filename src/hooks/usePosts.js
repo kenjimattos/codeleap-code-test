@@ -36,14 +36,19 @@ export function usePosts() {
   const loadMore = useCallback(async () => {
     if (!nextUrl || loadingMore) return;
 
+    const controller = new AbortController();
+    const { signal } = controller;
+
     try {
       setLoadingMore(true);
       setError(null);
-      const data = await api.getPosts(nextUrl);
+      const data = await api.getPosts(nextUrl, signal);
       setPosts(prev => [...prev, ...(data.results || [])]);
       setNextUrl(data.next || null);
     } catch (err) {
-      setError(err.message);
+      if (err.name !== 'AbortError') {
+        setError(err);
+      }
     } finally {
       setLoadingMore(false);
     }
