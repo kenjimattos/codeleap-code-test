@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { timeAgo } from '../../../utils/timeAgo';
 import styles from './CommentSection.module.css';
 
-function CommentSection({ comments, onAddComment }) {
+function CommentSection({ postId, comments, onAddComment }) {
   const [text, setText] = useState('');
+  const inputId = `comment-input-${postId}`;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,11 +17,11 @@ function CommentSection({ comments, onAddComment }) {
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <label htmlFor="comment-input" className={styles.srOnly}>
+        <label htmlFor={inputId} className={styles.srOnly}>
           Write a comment
         </label>
         <input
-          id="comment-input"
+          id={inputId}
           type="text"
           className={styles.input}
           placeholder="Write a comment..."

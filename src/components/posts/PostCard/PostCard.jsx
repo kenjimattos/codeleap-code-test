@@ -44,6 +44,7 @@ function PostCard({ post, isOwner, onEdit, onDelete, likes, isLiked, onLike, com
           </button>
         </div>
         <CommentSection
+          postId={post.id}
           comments={comments}
           onAddComment={onAddComment}
         />
