@@ -66,13 +66,23 @@ function getMockPaginatedPosts(offset = 0) {
 }
 
 // ============================================
-// API REAL (descomentada quando USE_MOCK = false)
+// REAL API
 // ============================================
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-if (!USE_MOCK && !API_URL) {
-  console.error('REACT_APP_API_URL is not configured. Please check your .env file.');
+// Custom error for configuration issues
+export class ConfigurationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'ConfigurationError';
+  }
+}
+
+function validateApiUrl() {
+  if (!API_URL) {
+    throw new ConfigurationError('API URL not configured. Please check your environment settings.');
+  }
 }
 
 export async function getPosts(url = API_URL, signal = null) {
@@ -93,6 +103,11 @@ export async function getPosts(url = API_URL, signal = null) {
 
     console.log(`[MOCK] Fetching posts at offset ${offset}`);
     return getMockPaginatedPosts(offset);
+  }
+
+  // Validate URL before making request
+  if (!url) {
+    validateApiUrl();
   }
 
   const response = await fetch(url, { signal });
@@ -117,6 +132,7 @@ export async function createPost(username, title, content) {
     return newPost;
   }
 
+  validateApiUrl();
   const response = await fetch(API_URL, {
     method: 'POST',
     headers: {
@@ -142,6 +158,7 @@ export async function updatePost(id, title, content) {
     throw new Error('Post not found');
   }
 
+  validateApiUrl();
   const response = await fetch(`${API_URL}${id}/`, {
     method: 'PATCH',
     headers: {
@@ -167,6 +184,7 @@ export async function deletePost(id) {
     throw new Error('Post not found');
   }
 
+  validateApiUrl();
   const response = await fetch(`${API_URL}${id}/`, {
     method: 'DELETE',
   });
