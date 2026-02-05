@@ -533,6 +533,7 @@ describe('Button', () => {
 - [x] Add AbortController to `loadMore()` function in `usePosts.js`
 - [x] Pass signal to `api.getPosts()` for proper cancellation
 - [x] Handle AbortError in catch block
+- [x] Store controller in `loadMoreControllerRef` and abort on unmount
 
 #### Step 34: Add useCallback/useMemo Optimizations ✅
 - [x] Wrap handlers in `Main.jsx` with `useCallback`
@@ -553,6 +554,11 @@ describe('Button', () => {
 
 #### Step 38: Fix Documentation Inconsistency ✅
 - [x] Updated Step 18 description to match actual paginated API implementation
+
+#### Step 39: Fix Inline Function Breaking React.memo ✅
+- [x] Removed inline arrow function `(text) => onAddComment(post.id, text)` from `PostList.jsx`
+- [x] Moved function creation to `PostCard.jsx` (inside memoized component)
+- [x] Prevents unnecessary re-renders of PostCard when parent re-renders
 
 ---
 

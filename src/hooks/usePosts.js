@@ -8,6 +8,7 @@ export function usePosts() {
   const [error, setError] = useState(null);
   const [nextUrl, setNextUrl] = useState(null);
   const abortControllerRef = useRef(null);
+  const loadMoreControllerRef = useRef(null);
 
   const hasMore = nextUrl !== null;
 
@@ -36,8 +37,11 @@ export function usePosts() {
   const loadMore = useCallback(async () => {
     if (!nextUrl || loadingMore) return;
 
-    const controller = new AbortController();
-    const { signal } = controller;
+    if (loadMoreControllerRef.current) {
+      loadMoreControllerRef.current.abort();
+    }
+    loadMoreControllerRef.current = new AbortController();
+    const { signal } = loadMoreControllerRef.current;
 
     try {
       setLoadingMore(true);
@@ -90,6 +94,9 @@ export function usePosts() {
     return () => {
       if (abortControllerRef.current) {
         abortControllerRef.current.abort();
+      }
+      if (loadMoreControllerRef.current) {
+        loadMoreControllerRef.current.abort();
       }
     };
   }, [fetchPosts]);

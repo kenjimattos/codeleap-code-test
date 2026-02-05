@@ -47,7 +47,7 @@ const PostCard = memo(function PostCard({ post, isOwner, onEdit, onDelete, likes
         <CommentSection
           postId={post.id}
           comments={comments}
-          onAddComment={onAddComment}
+          onAddComment={(text) => onAddComment(post.id, text)}
         />
       </div>
     </article>
