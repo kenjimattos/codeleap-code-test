@@ -1,9 +1,10 @@
+import { memo } from 'react';
 import { Trash2, Pencil, Heart } from 'lucide-react';
 import { timeAgo } from '../../../utils/timeAgo';
 import CommentSection from '../CommentSection';
 import styles from './PostCard.module.css';
 
-function PostCard({ post, isOwner, onEdit, onDelete, likes, isLiked, onLike, comments, onAddComment }) {
+const PostCard = memo(function PostCard({ post, isOwner, onEdit, onDelete, likes, isLiked, onLike, comments, onAddComment }) {
   return (
     <article className={styles.card}>
       <header className={styles.header}>
@@ -51,6 +52,6 @@ function PostCard({ post, isOwner, onEdit, onDelete, likes, isLiked, onLike, com
       </div>
     </article>
   );
-}
+});
 
 export default PostCard;
