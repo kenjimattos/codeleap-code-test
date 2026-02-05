@@ -26,7 +26,7 @@ export function usePosts() {
       setNextUrl(data.next || null);
     } catch (err) {
       if (err.name !== 'AbortError') {
-        setError(err.message);
+        setError(err);
       }
     } finally {
       setLoading(false);
@@ -60,7 +60,7 @@ export function usePosts() {
       await api.createPost(username, title, content);
       await fetchPosts();
     } catch (err) {
-      setError(err.message);
+      setError(err);
     }
   }, [fetchPosts]);
 
@@ -70,7 +70,7 @@ export function usePosts() {
       await api.updatePost(id, title, content);
       await fetchPosts();
     } catch (err) {
-      setError(err.message);
+      setError(err);
     }
   }, [fetchPosts]);
 
@@ -80,7 +80,7 @@ export function usePosts() {
       await api.deletePost(id);
       await fetchPosts();
     } catch (err) {
-      setError(err.message);
+      setError(err);
     }
   }, [fetchPosts]);
 
