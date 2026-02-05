@@ -20,7 +20,7 @@ function CreatePost({ onSubmit }) {
 
   return (
     <form className={styles.card} onSubmit={handleSubmit}>
-      <h2 className={styles.title}>What's on your mind?</h2>
+      <h2 className={styles.title}>What&apos;s on your mind?</h2>
       <TextInput
         label="Title"
         value={title}

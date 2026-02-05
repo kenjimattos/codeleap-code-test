@@ -1,19 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Modal from '../../common/Modal';
 import TextInput from '../../common/TextInput';
 import Button from '../../common/Button';
 import styles from './EditModal.module.css';
 
 function EditModal({ post, onClose, onSave }) {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-
-  useEffect(() => {
-    if (post) {
-      setTitle(post.title);
-      setContent(post.content);
-    }
-  }, [post]);
+  const [title, setTitle] = useState(post?.title || '');
+  const [content, setContent] = useState(post?.content || '');
 
   const handleSave = () => {
     if (title.trim() && content.trim()) {
