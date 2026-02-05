@@ -10,12 +10,17 @@ const USE_MOCK = process.env.NODE_ENV === 'test' ||
 
 // Mock data is only imported when needed (not included in production bundle)
 let mockModule = null;
+let mockIdCounter = 1000; // Counter for unique mock IDs
 
 async function getMockModule() {
   if (!mockModule) {
     mockModule = await import('./mockData');
   }
   return mockModule;
+}
+
+function generateMockId() {
+  return ++mockIdCounter;
 }
 
 // ============================================
@@ -76,7 +81,7 @@ export async function createPost(username, title, content) {
     const { delay, mockPosts } = await getMockModule();
     await delay(500);
     const newPost = {
-      id: Date.now(),
+      id: generateMockId(),
       username,
       title,
       content,
