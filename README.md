@@ -1,8 +1,8 @@
 # CodeLeap Network
 
-> **Technical Assessment** - This project was developed by **Kenji Yamamoto** as part of a technical evaluation for CodeLeap.
+**Technical Assessment** - This project was developed by **Kenji Mattos Kinoshita** as part of a technical evaluation for CodeLeap.
 
-A simple social posting application built with React where users can create, read, update, and delete posts.
+CodeLeap Network is a simple social posting application built with React where users can create, read, update, and delete posts.
 
 ## Features
 
@@ -57,7 +57,8 @@ src/
 │   ├── Login/
 │   └── Main/
 ├── services/
-│   └── api.js               # API service with mock mode
+│   ├── api.js               # API service with mock mode
+│   └── mockData.js          # Mock data (dev/test only)
 ├── hooks/
 │   ├── usePosts.js          # Posts data management
 │   ├── useLikes.js          # Likes state (localStorage)
@@ -65,7 +66,8 @@ src/
 ├── context/
 │   └── UserContext.jsx      # User authentication context
 ├── utils/
-│   └── timeAgo.js           # Time formatting utility
+│   ├── timeAgo.js           # Time formatting utility
+│   └── errorMessages.js     # Error message normalization
 ├── App.js
 ├── setupTests.js            # Jest configuration
 └── index.css                # Global styles & CSS variables
@@ -128,12 +130,17 @@ npm test -- --coverage --watchAll=false
 
 ### Test Coverage
 
-| File | Coverage |
-|------|----------|
-| `Button.jsx` | 100% |
-| `useLikes.js` | ~96% |
-| `useComments.js` | ~96% |
-| `timeAgo.js` | 100% |
+**37 tests** across 7 test files:
+
+| File | Tests | Description |
+|------|-------|-------------|
+| `api.test.js` | 7 | CRUD operations, pagination, abort signal |
+| `usePosts.test.js` | 6 | Hook lifecycle, loading, mutations |
+| `useLikes.test.js` | 3 | Like toggle, cleanup |
+| `useComments.test.js` | 3 | Comment add, unique IDs, cleanup |
+| `timeAgo.test.js` | 4 | Time formatting |
+| `errorMessages.test.js` | 9 | Error normalization |
+| `Button.test.js` | 4 | Component rendering, variants |
 
 ### Mock Mode
 
@@ -206,16 +213,13 @@ The application connects to the CodeLeap careers API.
 - **AbortController**: Used to prevent memory leaks and state updates on unmounted components.
 - **Accessible Modal**: Implements ARIA attributes, focus trap, and keyboard navigation.
 
-## Development
-
-This project was developed with AI-assisted coding using [Claude Code](https://claude.com/claude-code).
-
 ### Implementation Phases
 
 1. **Phase 1-2**: Core CRUD functionality and API integration
 2. **Phase 3**: Social features (likes, comments)
 3. **Phase 4**: Bug fixes, error handling, pagination
 4. **Phase 5**: Accessibility and testing
+5. **Phase 6**: Technical debt fixes and quality improvements
 
 See [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) for detailed implementation history.
 
