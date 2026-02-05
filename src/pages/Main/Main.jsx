@@ -3,6 +3,7 @@ import { useUser } from '../../context/UserContext';
 import { usePosts } from '../../hooks/usePosts';
 import { useLikes } from '../../hooks/useLikes';
 import { useComments } from '../../hooks/useComments';
+import { normalizeError } from '../../utils/errorMessages';
 import Header from '../../components/posts/Header';
 import CreatePost from '../../components/posts/CreatePost';
 import PostList from '../../components/posts/PostList';
@@ -52,7 +53,7 @@ function Main() {
       <main className={styles.content}>
         {error && (
           <div className={styles.errorBanner}>
-            {error}
+            {normalizeError(error)}
           </div>
         )}
         <CreatePost onSubmit={handleCreate} />
