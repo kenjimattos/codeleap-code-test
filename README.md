@@ -1,5 +1,7 @@
 # CodeLeap Network
 
+> **Technical Assessment** - This project was developed by **Kenji Yamamoto** as part of a technical evaluation for CodeLeap.
+
 A simple social posting application built with React where users can create, read, update, and delete posts.
 
 ## Features
